@@ -3,10 +3,8 @@ import { getFirestore } from "firebase-admin/firestore";
 import { getStorage } from "firebase-admin/storage";
 import "server-only";
 
-// Certifcado
-
 const decodedKey = Buffer.from(
-  process.env.FIREBASE_PRIVATE_KEY!,
+  process.env.FIREBASE_CLIENT_KEY_BASE64!,
   "base64"
 ).toString("utf-8");
 
@@ -16,7 +14,6 @@ export const firebaseCert = cert({
   privateKey: decodedKey,
 });
 
-// Instancia do app
 if (!getApps().length) {
   initializeApp({
     credential: firebaseCert,
